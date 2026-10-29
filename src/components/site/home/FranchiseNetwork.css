@@ -1,0 +1,496 @@
+.franchise-scroll {
+  position: relative;
+  overflow: hidden;
+  background: #eeebe0;
+  padding-top: clamp(14px, 1.6vw, 22px);
+  padding-bottom: clamp(14px, 1.6vw, 22px);
+}
+
+.franchise-scroll__inner {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Decorative background word, parallaxed slower than the card track */
+.franchise-scroll__bgword {
+  position: absolute;
+  left: 4vw;
+  top: 48%;
+  transform: translateY(-50%);
+  font-family: "Anton", "Plus Jakarta Sans", sans-serif;
+  font-size: 21vw;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  color: rgba(185, 16, 31, 0.1);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+.franchise-scroll__header {
+  position: relative;
+  z-index: 20;
+  padding: clamp(20px, 4vw, 56px) clamp(20px, 5vw, 72px) clamp(24px, 4vw, 48px);
+}
+
+.franchise-scroll__eyebrow {
+  margin: 0 0 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #ec1f36;
+}
+
+.franchise-scroll__heading {
+  margin: 0;
+  font-family: "Anton", "Plus Jakarta Sans", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  font-size: clamp(32px, 6vw, 96px);
+  white-space: nowrap;
+  color: #b9101f;
+}
+
+.franchise-scroll__viewport {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.franchise-scroll__track {
+  display: flex;
+  align-items: center;
+  gap: 4vw;
+  padding: 0 6vw;
+  will-change: transform;
+}
+
+/* Pillar cards */
+.franchise-card {
+  position: relative;
+  flex-shrink: 0;
+  width: clamp(220px, 22vw, 340px);
+  height: 52vh;
+  border-radius: 20px;
+  overflow: visible;
+  perspective: 1200px;
+  cursor: pointer;
+  transform: rotate(var(--tilt, 0deg)) translateY(var(--offset, 0px));
+  transition: transform 0.4s ease;
+}
+
+.franchise-card:hover,
+.franchise-card:focus-within,
+.franchise-card.is-flipped {
+  transform: rotate(0deg) translateY(0) scale(1.04);
+}
+
+.franchise-card:hover .franchise-card__frame,
+.franchise-card:focus-within .franchise-card__frame,
+.franchise-card.is-flipped .franchise-card__frame {
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+.franchise-card__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.franchise-card:hover .franchise-card__inner,
+.franchise-card:focus-within .franchise-card__inner,
+.franchise-card.is-flipped .franchise-card__inner {
+  transform: rotateY(180deg);
+}
+
+.franchise-card__face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.franchise-card__face--front {
+  transform: rotateY(0deg);
+}
+
+.franchise-card__face--back {
+  border-radius: 20px;
+  overflow: hidden;
+  transform: rotateY(180deg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+}
+
+.franchise-card__frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+  transition: box-shadow 0.4s ease;
+}
+
+.franchise-card__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.franchise-card__gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(20, 8, 10, 0.78) 0%,
+    rgba(20, 8, 10, 0.25) 45%,
+    rgba(20, 8, 10, 0) 70%
+  );
+}
+
+.franchise-card__badge {
+  position: absolute;
+  top: -16px;
+  right: -12px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: clamp(38px, 3.6vw, 52px);
+  height: clamp(38px, 3.6vw, 52px);
+  border-radius: 999px;
+  background: #fff8ef;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  font-family: "Anton", sans-serif;
+  font-size: clamp(16px, 1.7vw, 22px);
+  color: #ec1f36;
+}
+
+.franchise-card__copy {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  z-index: 3;
+}
+
+.franchise-card__kicker {
+  display: block;
+  margin-bottom: 4px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.franchise-card__name {
+  display: inline-block;
+  margin: 0;
+  font-family: "Anton", sans-serif;
+  font-size: clamp(26px, 3.4vw, 44px);
+  line-height: 1;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  transform: rotate(-4deg);
+  transform-origin: left bottom;
+}
+
+/* Back face */
+.franchise-card__back-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(12px) brightness(0.5);
+  transform: scale(1.1);
+}
+
+.franchise-card__back-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(90, 0, 25, 0.55);
+}
+
+.franchise-card__back-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 28px;
+  text-align: left;
+  pointer-events: auto;
+}
+
+.franchise-card__back-number {
+  font-family: "Anton", sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: #ec1f36;
+}
+
+.franchise-card__back-title {
+  margin: 0;
+  font-family: "Anton", sans-serif;
+  font-size: clamp(26px, 3vw, 40px);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.franchise-card__back-text {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.franchise-card__back-btn {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 24px;
+  border: 1px solid #fff;
+  border-radius: 999px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  background: transparent;
+  transition: background 0.3s ease, color 0.3s ease;
+  pointer-events: auto;
+}
+
+.franchise-card__back-btn:hover,
+.franchise-card__back-btn:focus-visible {
+  background: #a8002f;
+  border-color: #a8002f;
+}
+
+/* Final CTA button */
+.franchise-scroll__cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: clamp(20px, 3vw, 40px);
+  padding: 18px 40px;
+  border-radius: 999px;
+  background: #a8002f;
+  color: #fff;
+  text-decoration: none;
+  font-family: "Anton", sans-serif;
+  font-size: clamp(20px, 2vw, 28px);
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 20px 45px rgba(139, 13, 36, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.franchise-scroll__cta-arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.franchise-scroll__cta:hover,
+.franchise-scroll__cta:focus-visible {
+  background: #8f0d24;
+  transform: translateY(-3px);
+  box-shadow: 0 25px 55px rgba(139, 13, 36, 0.4);
+}
+
+.franchise-scroll__cta:hover .franchise-scroll__cta-arrow,
+.franchise-scroll__cta:focus-visible .franchise-scroll__cta-arrow {
+  transform: translateX(6px);
+}
+
+/* Custom cursor dot, desktop pointer only */
+.franchise-scroll__cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.franchise-scroll__cursor::before,
+.franchise-scroll__cursor::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.franchise-scroll__cursor::before {
+  inset: 0;
+  background: #ec1f36;
+}
+
+.franchise-scroll__cursor::after {
+  width: 10px;
+  height: 10px;
+  top: -2px;
+  right: -2px;
+  background: #ffc531;
+  box-shadow: 0 0 0 2px #eeebe0;
+}
+
+.franchise-scroll__cursor.is-visible {
+  opacity: 1;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .franchise-scroll__cursor {
+    display: none;
+  }
+}
+
+/* Mobile sizing while keeping the scrubbed pin behaviour */
+@media (max-width: 767px) {
+  .franchise-scroll__heading {
+    font-size: 40px;
+  }
+
+  .franchise-scroll__bgword {
+    font-size: 24vw;
+  }
+
+  .franchise-scroll {
+    padding-bottom: 40px;
+  }
+
+  .franchise-scroll__inner {
+    height: 70vh;
+  }
+
+  .franchise-scroll__header {
+    padding-bottom: 10px;
+  }
+
+  .franchise-scroll__viewport {
+    align-items: center;
+  }
+
+  .franchise-scroll__track {
+    gap: 48px;
+  }
+
+  .franchise-card {
+    width: 58vw;
+    height: 38vh;
+  }
+
+  .franchise-card__back-content {
+    padding: 20px;
+  }
+
+  .franchise-scroll__cta {
+    padding: 16px 30px;
+    font-size: 20px;
+  }
+}
+
+/* Reduced motion: unpin, fall back to a native horizontal swipe row */
+@media (prefers-reduced-motion: reduce) {
+  .franchise-scroll__inner {
+    height: auto;
+    display: block;
+    padding-bottom: clamp(20px, 4vw, 40px);
+  }
+
+  .franchise-scroll__bgword {
+    display: none;
+  }
+
+  .franchise-scroll__viewport {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .franchise-scroll__track {
+    transform: none !important;
+  }
+
+  .franchise-card,
+  .franchise-scroll__cta {
+    scroll-snap-align: start;
+  }
+
+  .franchise-card {
+    transform: none !important;
+  }
+
+  .franchise-card__inner {
+    transition: none;
+  }
+
+  .franchise-card:hover .franchise-card__inner,
+  .franchise-card:focus-within .franchise-card__inner,
+  .franchise-card.is-flipped .franchise-card__inner {
+    transform: none;
+  }
+
+  .franchise-card__face {
+    transition: opacity 0.3s ease;
+  }
+
+  .franchise-card__face--front {
+    opacity: 1;
+  }
+
+  .franchise-card__face--back {
+    opacity: 0;
+    transform: none;
+    pointer-events: none;
+  }
+
+  .franchise-card:hover .franchise-card__face--front,
+  .franchise-card:focus-within .franchise-card__face--front,
+  .franchise-card.is-flipped .franchise-card__face--front {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .franchise-card:hover .franchise-card__face--back,
+  .franchise-card:focus-within .franchise-card__face--back,
+  .franchise-card.is-flipped .franchise-card__face--back {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

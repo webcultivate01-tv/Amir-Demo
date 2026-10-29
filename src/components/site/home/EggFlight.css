@@ -1,0 +1,15 @@
+
+/* The flying egg is desktop-only. GSAP's matchMedia cleanup kills the
+   ScrollTrigger on breakpoint change, but it can't be relied on to also
+   restore every inline style it touched (position/opacity/size), so this
+   CSS guarantee is what actually keeps the egg out of layout, invisible,
+   and non-interactive below 1024px, independent of GSAP's cleanup timing. */
+.egg-flight-icon {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .egg-flight-icon {
+    display: block;
+  }
+}

@@ -1,0 +1,171 @@
+/* =========================================================
+   NEWS & MEDIA PAGE: motion only. Layout lives in Tailwind.
+========================================================= */
+
+/* ---------- Hero slides ---------- */
+.news-slide {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 1s;
+}
+.news-slide.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: opacity 1s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s;
+}
+
+/* Per-slide entrance: where an inactive slide waits */
+.news-slide[data-anim="right"] {
+  transform: translateX(8%);
+}
+.news-slide[data-anim="left"] {
+  transform: translateX(-8%);
+}
+.news-slide[data-anim="zoom"] {
+  transform: scale(1.15);
+}
+.news-slide[data-anim="up"] {
+  transform: translateY(7%);
+}
+
+@keyframes newsKen {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.news-slide.is-active .news-ken {
+  animation: newsKen 9s ease-out both;
+}
+
+@keyframes newsRise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.news-slide.is-active .news-rise {
+  animation: newsRise 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes newsFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.news-slide.is-active .news-float {
+  animation: newsFloat 6s ease-in-out infinite;
+}
+
+/* Progress bar on the active headline tab. Its animationend advances
+   the slide, so pausing the animation also pauses autoplay. */
+@keyframes newsProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.news-progress {
+  transform-origin: left center;
+  animation: newsProgress 7s linear forwards;
+}
+.news-hero.is-paused .news-progress {
+  animation-play-state: paused;
+}
+@media (hover: hover) {
+  .news-hero:hover .news-progress {
+    animation-play-state: paused;
+  }
+}
+.news-hero:has(:focus-visible) .news-progress {
+  animation-play-state: paused;
+}
+
+@keyframes newsPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(236, 31, 54, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(236, 31, 54, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(236, 31, 54, 0);
+  }
+}
+.news-live-dot {
+  animation: newsPulse 1.8s ease-out infinite;
+}
+
+/* ---------- Story grid + modal ---------- */
+@keyframes newsFade {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.news-card-in {
+  animation: newsFade 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes newsModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.news-modal-in {
+  animation: newsModalIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes newsBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.news-backdrop-in {
+  animation: newsBackdropIn 0.3s ease both;
+}
+
+/* ---------- Reduced motion: no autoplay, no movement ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .news-progress,
+  .news-live-dot,
+  .news-card-in,
+  .news-modal-in,
+  .news-backdrop-in,
+  .news-slide.is-active .news-ken,
+  .news-slide.is-active .news-rise,
+  .news-slide.is-active .news-float {
+    animation: none !important;
+  }
+  .news-slide,
+  .news-slide.is-active {
+    transition: none;
+    transform: none !important;
+  }
+}

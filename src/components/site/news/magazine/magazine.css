@@ -1,0 +1,118 @@
+/* =========================================================
+   NEWS & MEDIA (magazine) — motion only. Layout lives in Tailwind.
+========================================================= */
+
+/* ---------- Mobile hero carousel (scroll-snap) ---------- */
+.mag-hero-track {
+  scrollbar-width: none;
+}
+.mag-hero-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- Foodverse tab panel fade ---------- */
+@keyframes magTabFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mag-tab-panel {
+  animation: magTabFade 0.35s ease both;
+}
+
+/* ---------- Generic rise-in for cards entering the viewport ---------- */
+@keyframes magRise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mag-rise {
+  animation: magRise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---------- Poll mascot: idle float + a celebratory flex on vote ---------- */
+@keyframes magChickenFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-3deg);
+  }
+}
+.mag-chicken-float {
+  animation: magChickenFloat 4s ease-in-out infinite;
+}
+
+@keyframes magChickenCheer {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.22) rotate(-10deg);
+  }
+  50% {
+    transform: scale(0.94) rotate(8deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(-4deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+.mag-chicken-cheer {
+  animation: magChickenCheer 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mag-tab-panel,
+  .mag-rise,
+  .mag-chicken-float,
+  .mag-chicken-cheer {
+    animation: none !important;
+  }
+  .mag-hero-track {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- Scroll reveal: fade + rise for headlines/snippets ---------- */
+.mag-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mag-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mag-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Dark contrast blocks on an otherwise light page ---------- */
+/* Tells the browser this subtree is intentionally dark (light-on-dark
+   text), so OS/browser "force dark" or auto theme-adjustment heuristics
+   don't try to re-invert or re-lighten it — which is what silently washes
+   white headings/menus out to near-invisible when the system is in its
+   normal/light color scheme. Forcing light-dyed text colors alone isn't
+   enough to survive that heuristic; the browser needs this signal too. */
+.mag-dark-block {
+  color-scheme: dark;
+}
