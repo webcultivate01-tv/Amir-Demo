@@ -1,11 +1,19 @@
 import React from "react";
 
+import NewsHeroSection from "../../components/site/news/NewsHeroSection";
+import FeaturedStory from "../../components/site/news/FeaturedStory";
+import LatestStories from "../../components/site/news/LatestStories";
+import Newsletter from "../../components/site/news/Newsletter";
+import FinalCta from "../../components/site/common/FinalCta";
+
 const NewsPage = () => (
-  <div className="flex min-h-[60vh] items-center justify-center bg-mag-offwhite px-4 py-24 text-center text-mag-ink">
-    <h1 className="text-2xl font-semibold md:text-4xl">
-      This page is currently under development.
-    </h1>
-  </div>
+  <main className="bg-white text-[#171719]">
+    <NewsHeroSection />
+    <FeaturedStory />
+    <LatestStories />
+    <Newsletter />
+    <FinalCta />
+  </main>
 );
 
 export default NewsPage;

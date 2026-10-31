@@ -109,7 +109,7 @@ export default function FeaturedProducts() {
     <section
       id="featured-products-section"
       aria-label="Featured products"
-      className="relative overflow-hidden bg-[#FBF8F7] px-4 pb-8 pt-20 sm:px-8 sm:py-20 lg:px-16 lg:py-28"
+      className="relative overflow-hidden bg-[#FBF8F7] px-4 pb-10 pt-20 sm:px-8 sm:py-20 lg:px-16 lg:py-28"
     >
       <div className="pointer-events-none absolute -left-32 top-10 h-96 w-96 rounded-full bg-[#EC1F36]/[0.06] blur-3xl" />
       <div className="pointer-events-none absolute -right-24 bottom-0 h-96 w-96 rounded-full bg-[#EC1F36]/[0.05] blur-3xl" />

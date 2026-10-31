@@ -95,9 +95,7 @@ export default function AmirNumbers() {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    // Section is tall on mobile (stacked stats): finish revealing once its top
-    // reaches 35% of the viewport so no blank gap shows after Featured Products.
-    offset: ["start end", "start 35%"],
+    offset: ["start end", "center center"],
   });
   const progress = useSpring(scrollYProgress, {
     stiffness: 90,

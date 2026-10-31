@@ -292,10 +292,6 @@ export default function CatalogPage() {
     page * PAGE_SIZE
   );
 
-  // Mobile shows a sliding window of 3 page numbers around the current page
-  const windowStart = Math.max(1, Math.min(page - 1, totalPages - 2));
-  const inMobileWindow = (n) => n >= windowStart && n < windowStart + 3;
-
   const goToPage = (p) => {
     setPage(p);
     productsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -414,24 +410,24 @@ export default function CatalogPage() {
                 {...reveal((i % 3) * 0.1, 48)}
                 className="group"
               >
-                <div className="relative aspect-[16/11] overflow-hidden rounded-2xl bg-neutral-100 sm:rounded-[22px]">
+                <div className="relative aspect-[16/11] overflow-hidden rounded-[16px] bg-neutral-100 sm:rounded-[22px]">
                   <img
                     src={product.image}
                     alt={product.name}
                     loading="lazy"
                     className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[9px] sm:left-4 sm:top-4 sm:px-3 sm:py-1 sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-700 backdrop-blur">
+                  <span className="absolute left-2 top-2 rounded-full bg-white/90 px-2 py-0.5 text-[10px] sm:left-4 sm:top-4 sm:px-3 sm:py-1 sm:text-[11px] font-semibold uppercase tracking-wider text-neutral-700 backdrop-blur">
                     Fresh
                   </span>
                 </div>
 
-                <div className="flex flex-col items-start gap-2 px-1 pt-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pt-4">
+                <div className="flex flex-col gap-3 px-1 pt-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pt-4">
                   <div className="min-w-0">
-                    <h3 className="text-sm font-semibold leading-snug tracking-tight sm:text-lg">
+                    <h3 className="text-sm font-semibold tracking-tight sm:text-lg">
                       {product.name}
                     </h3>
-                    <p className="mt-1 hidden text-sm leading-6 text-neutral-500 sm:block">
+                    <p className="mt-1 line-clamp-2 text-xs leading-5 text-neutral-500 sm:line-clamp-none sm:text-sm sm:leading-6">
                       {product.text}
                     </p>
                   </div>
@@ -439,7 +435,7 @@ export default function CatalogPage() {
                   <Link
                     to="/contact"
                     aria-label={`Order ${product.name}`}
-                    className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#EC1F36] px-3.5 py-2 text-xs font-semibold text-white transition hover:bg-[#c9172d] sm:gap-2 sm:px-5 sm:py-2.5 sm:text-sm"
+                    className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#EC1F36] px-4 py-2 text-xs sm:px-5 sm:py-2.5 sm:text-sm font-semibold text-white transition hover:bg-[#c9172d]"
                   >
                     Order Now
                     <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -452,13 +448,13 @@ export default function CatalogPage() {
 
           {/* PAGINATION */}
           {totalPages > 1 && (
-            <nav aria-label="Pagination" className="mt-12 flex items-center justify-center space-x-2 sm:space-x-4">
+            <nav aria-label="Pagination" className="mt-12 flex justify-center space-x-4">
               <button
                 type="button"
                 aria-label="Previous page"
                 disabled={page === 1}
                 onClick={() => goToPage(page - 1)}
-                className="flex h-9 w-9 shrink-0 items-center justify-center text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EC1F36] rotate-180 text-neutral-600 hover:text-[#EC1F36] disabled:cursor-default disabled:text-neutral-300 sm:rounded-full sm:border sm:border-neutral-300 sm:hover:border-[#EC1F36] sm:disabled:bg-neutral-100 sm:disabled:text-neutral-400 sm:disabled:hover:border-neutral-300 sm:disabled:hover:text-neutral-400"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EC1F36] rotate-180 border-neutral-300 text-neutral-600 hover:border-[#EC1F36] hover:text-[#EC1F36] disabled:cursor-default disabled:bg-neutral-100 disabled:text-neutral-400 disabled:hover:border-neutral-300 disabled:hover:text-neutral-400"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="size-3 overflow-visible" fill="currentColor" viewBox="0 0 451.846 451.847" aria-hidden="true"><path d="M345.441 248.292 151.154 442.573c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744L278.318 225.92 106.409 54.017c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.287 194.284c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373" /></svg>
               </button>
@@ -469,7 +465,7 @@ export default function CatalogPage() {
                   type="button"
                   aria-current={n === page ? "page" : undefined}
                   onClick={() => goToPage(n)}
-                  className={`${inMobileWindow(n) ? "flex" : "hidden sm:flex"} h-9 w-9 shrink-0 items-center justify-center rounded-full border text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EC1F36] ${
+                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EC1F36] ${
                     n === page
                       ? "border-[#EC1F36] bg-[#EC1F36] text-white"
                       : "border-neutral-300 text-[#171719] hover:border-[#EC1F36] hover:bg-[#FFF4F5] hover:text-[#EC1F36]"
@@ -484,7 +480,7 @@ export default function CatalogPage() {
                 aria-label="Next page"
                 disabled={page === totalPages}
                 onClick={() => goToPage(page + 1)}
-                className="flex h-9 w-9 shrink-0 items-center justify-center text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EC1F36] text-neutral-600 hover:text-[#EC1F36] disabled:cursor-default disabled:text-neutral-300 sm:rounded-full sm:border sm:border-neutral-300 sm:hover:border-[#EC1F36] sm:disabled:bg-neutral-100 sm:disabled:text-neutral-400 sm:disabled:hover:border-neutral-300 sm:disabled:hover:text-neutral-400"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#EC1F36] border-neutral-300 text-neutral-600 hover:border-[#EC1F36] hover:text-[#EC1F36] disabled:cursor-default disabled:bg-neutral-100 disabled:text-neutral-400 disabled:hover:border-neutral-300 disabled:hover:text-neutral-400"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="size-3 overflow-visible" fill="currentColor" viewBox="0 0 451.846 451.847" aria-hidden="true"><path d="M345.441 248.292 151.154 442.573c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744L278.318 225.92 106.409 54.017c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.287 194.284c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373" /></svg>
               </button>

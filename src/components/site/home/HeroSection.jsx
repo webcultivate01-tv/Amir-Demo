@@ -142,13 +142,13 @@ export default function HeroSection() {
           initial={reduceMotion ? false : entrance}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.9 }}
-          className="mt-6 flex flex-nowrap sm:mt-8 items-center justify-center gap-2 sm:gap-3"
+          className="mt-6 flex flex-wrap sm:mt-8 items-center justify-center gap-3"
         >
           <Link
             to="/catalog"
-            className="group inline-flex min-h-12 items-center gap-2 whitespace-nowrap rounded-lg bg-[#EC1F36] px-4 py-3 text-sm font-semibold sm:gap-5 sm:px-6 sm:text-base text-white transition-colors duration-300 hover:bg-[#B9101F] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            className="group inline-flex min-h-12 items-center gap-5 bg-[#EC1F36] px-6 py-3 text-base font-semibold text-white transition-colors duration-300 hover:bg-[#B9101F] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
-            Explore our products
+            Explore our range
             <span
               aria-hidden="true"
               className="transition-transform duration-300 group-hover:translate-x-1"
@@ -159,7 +159,7 @@ export default function HeroSection() {
 
           <Link
             to="/contact"
-            className="inline-flex min-h-12 items-center gap-2 whitespace-nowrap rounded-lg border border-white/70 bg-black/10 px-4 py-3 text-sm font-semibold sm:gap-3 sm:px-6 sm:text-base text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-[#271719] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            className="inline-flex min-h-12 items-center gap-3 border border-white/70 bg-black/10 px-6 py-3 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-[#271719] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
           >
             Contact us
             <span aria-hidden="true">↗</span>

@@ -1,152 +1,237 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Link } from "react-router-dom";
-import StoryArt from "./StoryArt";
-import { Arrow, SectionLabel } from "./Ornaments";
+import { motion } from "framer-motion";
 
-const FOCUSABLE =
-  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+const EASE = [0.22, 1, 0.36, 1];
 
-/* Mounted only while a story is open, so mount/unmount handles
-   scroll-lock and focus return. */
-export default function StoryModal({ story, onClose }) {
-  const dialogRef = useRef(null);
-  const closeRef = useRef(null);
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
+export default function StoryModal({ story, onClose, layout = "split" }) {
+  const panelRef = useRef(null);
+  const closeButtonRef = useRef(null);
+
+  // Lock background scroll while the modal is open, restore on close.
   useEffect(() => {
-    const returnTo = document.activeElement;
-    const prevOverflow = document.body.style.overflow;
-
+    const original = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
-
     return () => {
-      document.body.style.overflow = prevOverflow;
-      if (returnTo && typeof returnTo.focus === "function") returnTo.focus();
+      document.body.style.overflow = original;
     };
   }, []);
 
-  const onKeyDown = (e) => {
-    if (e.key === "Escape") {
-      e.stopPropagation();
-      onClose();
-      return;
-    }
+  // Move focus into the modal on open, return it to the trigger on close.
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    closeButtonRef.current?.focus();
+    return () => {
+      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
+    };
+  }, []);
 
-    if (e.key !== "Tab") return;
+  // Escape to close, Tab to stay trapped inside the dialog.
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !panelRef.current) return;
 
-    const nodes = dialogRef.current?.querySelectorAll(FOCUSABLE);
-    if (!nodes || nodes.length === 0) return;
+      const focusable = Array.from(
+        panelRef.current.querySelectorAll(FOCUSABLE_SELECTOR)
+      ).filter((el) => el.offsetParent !== null);
+      if (focusable.length === 0) return;
 
-    const first = nodes[0];
-    const last = nodes[nodes.length - 1];
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
 
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
+
+  const onBackdropClick = (e) => {
+    if (e.target === e.currentTarget) onClose();
   };
 
-  const titleId = `story-title-${story.id}`;
-
   return createPortal(
-    <div
-      className="news-backdrop-in fixed inset-0 z-[100] flex items-center justify-center bg-[#171719]/75 p-3 backdrop-blur-sm sm:p-6"
-      onMouseDown={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25, ease: EASE }}
+      onClick={onBackdropClick}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#171719]/65 p-4 backdrop-blur-sm sm:p-6"
     >
-      <div
-        ref={dialogRef}
+      <motion.div
+        ref={panelRef}
         role="dialog"
         aria-modal="true"
-        aria-labelledby={titleId}
-        onKeyDown={onKeyDown}
-        className="news-modal-in relative max-h-[92vh] w-full max-w-[980px] overflow-y-auto rounded-[24px] bg-white text-[#EC1F36] shadow-[0_40px_100px_-30px_rgba(0,0,0,0.6)]"
+        aria-labelledby="story-modal-title"
+        initial={{ opacity: 0, y: 24, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 16, scale: 0.97 }}
+        transition={{ duration: 0.32, ease: EASE }}
+        className={
+          layout === "stacked"
+            ? "relative flex max-h-[88vh] w-full max-w-xl flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_40px_100px_-20px_rgba(23,23,25,0.45)] sm:rounded-[28px]"
+            : layout === "story"
+            ? "relative flex max-h-[90vh] w-full max-w-2xl flex-col overflow-hidden rounded-[24px] bg-white shadow-[0_40px_100px_-20px_rgba(23,23,25,0.45)] sm:rounded-[28px]"
+            : "relative h-[85vh] max-h-[720px] w-full max-w-4xl overflow-hidden rounded-[24px] bg-white shadow-[0_40px_100px_-20px_rgba(23,23,25,0.45)] sm:rounded-[28px]"
+        }
       >
         <button
-          ref={closeRef}
+          ref={closeButtonRef}
           type="button"
           onClick={onClose}
           aria-label="Close story"
-          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-[#EC1F36]/30 bg-white text-[#EC1F36] transition-all duration-300 shadow-md hover:rotate-90 hover:bg-[#EC1F36] hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#EC1F36]"
+          className="absolute right-4 top-4 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[#171719] shadow-md backdrop-blur transition-colors hover:bg-white hover:text-[#EC1F36] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#EC1F36]"
         >
-          <svg
-            viewBox="0 0 24 24"
-            className="h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <path d="M6 6l12 12M18 6L6 18" />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-5 w-5">
+            <path d="M6 6l12 12M18 6 6 18" />
           </svg>
         </button>
 
-        <div className="grid md:grid-cols-[0.85fr_1.15fr]">
-          <div className="group relative aspect-[4/3] md:aspect-auto md:min-h-[460px]">
-            <StoryArt art={story.art} />
-            <div className="pointer-events-none absolute inset-3 border border-white/30" />
-          </div>
-
-          <div className="px-6 pb-10 pt-8 sm:px-10 md:px-12 md:py-14">
-            <SectionLabel>
-              {story.category} &mdash; {story.place}
-            </SectionLabel>
-
-            <h2
-              id={titleId}
-              className="mt-5 pr-10 font-seasons text-[28px] leading-[1.1] tracking-[-0.01em] text-[#171719] sm:text-[34px]"
-            >
-              {story.title}
-            </h2>
-
-            <div className="mt-6 h-[3px] w-10 bg-[#EC1F36]" />
-
-            <div className="mt-6 space-y-4">
-              {story.body.map((para, i) => (
-                <p
-                  key={i}
-                  className="font-poppins text-[15px] leading-[1.8] text-[#171719]/70"
-                >
-                  {para}
-                </p>
-              ))}
+        {layout === "story" ? (
+          <div className="flex h-full flex-col overflow-y-auto">
+            <div className="flex w-full shrink-0 items-center justify-center bg-neutral-100">
+              <img
+                src={story.image}
+                alt={story.title}
+                className="max-h-[42vh] w-full object-contain sm:max-h-[48vh]"
+              />
             </div>
 
-            <p className="mt-6 font-poppins text-[10px] uppercase tracking-[0.14em] text-[#EC1F36]/55">
-              {story.read}
-            </p>
+            <div className="px-6 py-7 sm:px-9 sm:py-9">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span className="rounded-full bg-[#FBE8E9] px-3 py-1 text-xs font-semibold uppercase tracking-[0.1em] text-[#EC1F36]">
+                  {story.category}
+                </span>
+                <span className="h-1 w-1 rounded-full bg-neutral-300" aria-hidden="true" />
+                <time className="text-xs font-medium uppercase tracking-[0.12em] text-neutral-400">
+                  {story.date}
+                </time>
+                {story.readingTime && (
+                  <>
+                    <span className="h-1 w-1 rounded-full bg-neutral-300" aria-hidden="true" />
+                    <span className="text-xs font-medium uppercase tracking-[0.12em] text-neutral-400">
+                      {story.readingTime}
+                    </span>
+                  </>
+                )}
+              </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              {story.cta && (
-                <Link
-                  to={story.cta.to}
-                  onClick={onClose}
-                  className="inline-flex h-14 items-center gap-3 rounded-lg bg-[#EC1F36] px-8 font-poppins text-[13px] font-bold uppercase tracking-[0.12em] text-white transition-colors duration-300 hover:bg-[#c8172d]"
-                >
-                  {story.cta.label}
-                  <Arrow className="h-4 w-4" />
-                </Link>
-              )}
-
-              <button
-                type="button"
-                onClick={onClose}
-                className="inline-flex h-14 items-center rounded-lg border border-[#EC1F36] px-8 font-poppins text-[13px] font-bold uppercase tracking-[0.12em] text-[#EC1F36] transition-colors duration-300 hover:bg-[#EC1F36] hover:text-white"
+              <h2
+                id="story-modal-title"
+                className="mt-4 font-seasons text-2xl font-medium leading-[1.15] tracking-[-0.02em] text-[#171719] sm:text-3xl"
               >
-                Back to news
-              </button>
+                {story.title}
+              </h2>
+
+              <p className="mt-4 text-[15px] font-medium leading-7 text-[#171719]/80">
+                {story.summary}
+              </p>
+
+              <div className="mt-5 space-y-4 border-t border-neutral-100 pt-5">
+                {story.content.map((paragraph, index) => (
+                  <p key={index} className="text-[15px] leading-7 text-neutral-600">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>,
+        ) : layout === "stacked" ? (
+          <div className="flex h-full flex-col overflow-y-auto">
+            <div className="relative h-56 w-full shrink-0 overflow-hidden sm:h-72">
+              <img src={story.image} alt={story.title} className="h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+            </div>
+
+            <div className="mx-auto w-full max-w-md px-6 py-7 sm:px-8 sm:py-9">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#801821]">
+                  {story.category}
+                </span>
+                <span className="h-1 w-1 rounded-full bg-neutral-300" aria-hidden="true" />
+                <time className="text-xs font-medium uppercase tracking-[0.12em] text-neutral-400">
+                  {story.date}
+                </time>
+              </div>
+
+              <h2
+                id="story-modal-title"
+                className="mt-4 font-seasons text-[26px] font-medium leading-[1.15] tracking-[-0.02em] text-[#171719] sm:text-[30px]"
+              >
+                {story.title}
+              </h2>
+
+              <p className="mt-3 text-[16px] font-medium leading-7 text-[#171719]/75">
+                {story.summary}
+              </p>
+
+              <div className="mt-6 space-y-4 border-t border-neutral-100 pt-6">
+                {story.content.map((paragraph, index) => (
+                  <p key={index} className="text-[15px] leading-7 text-neutral-600">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="flex h-full flex-col overflow-y-auto md:flex-row md:overflow-hidden">
+            <div className="relative h-64 w-full shrink-0 overflow-hidden sm:h-80 md:h-full md:w-[42%]">
+              <img
+                src={story.image}
+                alt={story.title}
+                className="h-full w-full object-cover"
+              />
+            </div>
+
+            <div className="flex-1 p-6 sm:p-8 md:h-full md:overflow-y-auto md:p-10">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#801821]">
+                  {story.category}
+                </span>
+                <span className="h-1 w-1 rounded-full bg-neutral-300" aria-hidden="true" />
+                <time className="text-xs font-medium uppercase tracking-[0.12em] text-neutral-400">
+                  {story.date}
+                </time>
+              </div>
+
+              <h2
+                id="story-modal-title"
+                className="mt-4 font-seasons text-2xl font-medium leading-[1.15] tracking-[-0.02em] text-[#171719] sm:text-3xl"
+              >
+                {story.title}
+              </h2>
+
+              <p className="mt-4 text-[15px] font-medium leading-7 text-[#171719]/80">
+                {story.summary}
+              </p>
+
+              <div className="mt-5 space-y-4 border-t border-neutral-100 pt-5">
+                {story.content.map((paragraph, index) => (
+                  <p key={index} className="text-[15px] leading-7 text-neutral-600">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </motion.div>
+    </motion.div>,
     document.body
   );
 }
