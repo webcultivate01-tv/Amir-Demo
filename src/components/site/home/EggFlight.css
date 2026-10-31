@@ -5,11 +5,11 @@
    CSS guarantee is what actually keeps the egg out of layout, invisible,
    and non-interactive below 1024px, independent of GSAP's cleanup timing. */
 .egg-flight-icon {
-  display: none;
+  display: none !important;
 }
 
 @media (min-width: 1024px) {
   .egg-flight-icon {
-    display: block;
+    display: block !important;
   }
 }

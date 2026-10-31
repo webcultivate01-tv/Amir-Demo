@@ -112,29 +112,29 @@ export default function AmirNumbers() {
   const ringY2 = useTransform(pageProgress, [0, 1], [100, -100]);
   const ringRotate = useTransform(pageProgress, [0, 1], [0, 90]);
 
-  const headingOpacity = useTransform(progress, [0, 0.3], [0, 1]);
-  const headingY = useTransform(progress, [0, 0.3], [40, 0]);
+  const headingOpacity = useTransform(progress, [0, 0.12], [0, 1]);
+  const headingY = useTransform(progress, [0, 0.12], [20, 0]);
   const lineScale = useTransform(progress, [0.1, 0.5], [0, 1]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative flex items-center overflow-hidden bg-[#F5F3F0] px-6 pb-14 pt-8 sm:px-10 sm:py-14 lg:px-16 lg:py-16"
+      className="relative flex items-center overflow-hidden bg-[#F5F3F0] px-6 pb-14 pt-10 sm:px-10 sm:py-14 lg:px-16 lg:py-16"
     >
       {/* Decorative parallax rings */}
       {!reduceMotion && (
         <>
           <motion.div
             style={{ y: ringY, rotate: ringRotate }}
-            className="pointer-events-none absolute -left-32 top-10 h-[26rem] w-[26rem] rounded-full border border-[#EC1F36]/15"
+            className="pointer-events-none absolute -left-32 top-10 hidden h-[26rem] lg:block w-[26rem] rounded-full border border-[#EC1F36]/15"
           />
           <motion.div
             style={{ y: ringY2 }}
-            className="pointer-events-none absolute -right-40 bottom-0 h-[32rem] w-[32rem] rounded-full border border-[#EC1F36]/10"
+            className="pointer-events-none absolute -right-40 bottom-0 hidden h-[32rem] lg:block w-[32rem] rounded-full border border-[#EC1F36]/10"
           />
           <motion.div
             style={{ y: ringY2 }}
-            className="pointer-events-none absolute -right-24 bottom-16 h-[22rem] w-[22rem] rounded-full border border-[#EC1F36]/10"
+            className="pointer-events-none absolute -right-24 bottom-16 hidden h-[22rem] lg:block w-[22rem] rounded-full border border-[#EC1F36]/10"
           />
         </>
       )}

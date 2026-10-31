@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, Link, Outlet, useLocation } from "react-router-dom";
 
-import amirNavbarLogo from "../../../images/amir-seal-of-trust.png";
-import amirFooterLogo from "../../../images/amir-wordmark-white.png";
-import iraLogo from "../../../images/ira-logo.png";
+import amirNavbarLogo from "../../../images/amir-seal-of-trust.webp";
+import amirFooterLogo from "../../../images/amir-wordmark-white.webp";
+import iraLogo from "../../../images/ira-logo.webp";
 
 const links = [
   { to: "/", label: "Home", end: true },

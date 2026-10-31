@@ -5,13 +5,13 @@
    update it whenever a story is refreshed.
 ========================================================= */
 
-import aboutShop from "../../images/aboutShop.png";
-import sealOfTrust from "../../images/amir-seal-of-trust.png";
-import founderPhoto from "../../images/founder-vijay-more.png";
-import rawChickenPlate from "../../images/raw-chicken-plate.png";
-import rawMuttonPlate from "../../images/raw-mutton-plate.png";
-import freshFishPlate from "../../images/fresh-fish-plate.png";
-import aboutHero from "../../images/aboutHero.png";
+import aboutShop from "../../images/aboutShop.webp";
+import sealOfTrust from "../../images/amir-seal-of-trust.webp";
+import founderPhoto from "../../images/founder-vijay-more.webp";
+import rawChickenPlate from "../../images/raw-chicken-plate.webp";
+import rawMuttonPlate from "../../images/raw-mutton-plate.webp";
+import freshFishPlate from "../../images/fresh-fish-plate.webp";
+import aboutHero from "../../images/aboutHero.webp";
 
 export const newsStories = [
   {

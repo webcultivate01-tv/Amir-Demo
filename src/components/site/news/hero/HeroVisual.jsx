@@ -1,8 +1,8 @@
 import { motion, useTransform } from "framer-motion";
-import heroFood from "../../../../../images/newsmedia/NewHeroNews.png";
-import productChicken from "../../../../../images/products/chicken/Whole Chicken With Skin.png";
-import fishPlate from "../../../../../images/fresh-fish-plate.png";
-import muttonPlate from "../../../../../images/raw-mutton-plate.png";
+import heroFood from "../../../../../images/newsmedia/NewHeroNews.webp";
+import productChicken from "../../../../../images/products/chicken/Whole Chicken With Skin.webp";
+import fishPlate from "../../../../../images/fresh-fish-plate.webp";
+import muttonPlate from "../../../../../images/raw-mutton-plate.webp";
 
 const RING_PANELS = [
   { img: productChicken, angle: -70, dist: 1 },

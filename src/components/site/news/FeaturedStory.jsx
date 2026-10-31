@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
-import amirProteinHero from "../../../../images/amir-protein-hero.png";
+import amirProteinHero from "../../../../images/amir-protein-hero.webp";
 
 const EASE = [0.22, 1, 0.36, 1];
 

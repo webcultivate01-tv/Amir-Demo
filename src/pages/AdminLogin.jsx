@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
 import { serverUrl } from "../App";
 import { setUserData } from "../redux/userSlice";
-import amirNavbarLogo from "../../images/amir-seal-of-trust.png";
+import amirNavbarLogo from "../../images/amir-seal-of-trust.webp";
 
 const inputClass =
   "border border-gray-200 bg-gray-50 rounded-xl px-4 py-3 text-sm outline-none transition-all duration-200 placeholder:text-gray-400 hover:border-gray-300 focus:bg-white focus:border-black focus:ring-4 focus:ring-black/10 w-full";

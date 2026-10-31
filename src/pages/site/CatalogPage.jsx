@@ -17,11 +17,11 @@ const EASE = [0.22, 1, 0.36, 1];
 const PAGE_SIZE = 6;
 
 const categories = [
-  { name: "All Cuts", image: "/images/amir-protein-hero.png" },
-  { name: "Chicken", image: "/images/raw-chicken-plate.png" },
-  { name: "Mutton", image: "/images/raw-mutton-plate.png" },
-  { name: "Fish & Seafood", image: "/images/fresh-fish-plate.png" },
-  { name: "Farm Eggs", image: "/images/fresh-eggs-plate.png" },
+  { name: "All Cuts", image: "/images/amir-protein-hero.webp" },
+  { name: "Chicken", image: "/images/raw-chicken-plate.webp" },
+  { name: "Mutton", image: "/images/raw-mutton-plate.webp" },
+  { name: "Fish & Seafood", image: "/images/fresh-fish-plate.webp" },
+  { name: "Farm Eggs", image: "/images/fresh-eggs-plate.webp" },
 ];
 
 const products = {

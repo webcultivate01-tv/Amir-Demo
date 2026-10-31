@@ -15,7 +15,7 @@ const products = [
     caption: "FRESHNESS, EVERY DAY",
     description:
       "Fresh chicken, carefully handled with quality and hygiene in mind.",
-    image: "/images/raw-chicken-plate.png",
+    image: "/images/raw-chicken-plate.webp",
   },
   {
     name: "Tender Mutton",
@@ -23,7 +23,7 @@ const products = [
     caption: "QUALITY YOU CAN TRUST",
     description:
       "Quality mutton selected with care for freshness and consistency.",
-    image: "/images/raw-mutton-plate.png",
+    image: "/images/raw-mutton-plate.webp",
   },
   {
     name: "Fresh Fish",
@@ -31,7 +31,7 @@ const products = [
     caption: "FRESH FROM THE WATER",
     description:
       "Fresh fish and seafood, handled with care from selection to your table.",
-    image: "/images/fresh-fish-plate.png",
+    image: "/images/fresh-fish-plate.webp",
   },
   {
     name: "Farm Fresh Eggs",
@@ -39,7 +39,7 @@ const products = [
     caption: "A DAILY ESSENTIAL",
     description:
       "Fresh eggs for everyday meals and family favourites.",
-    image: "/images/fresh-eggs-plate.png",
+    image: "/images/fresh-eggs-plate.webp",
   },
 ];
 

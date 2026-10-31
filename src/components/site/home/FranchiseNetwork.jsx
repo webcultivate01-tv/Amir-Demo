@@ -14,7 +14,7 @@ const pillars = [
     text: "A name families have trusted since 1991.",
     tilt: -5,
     offset: -18,
-    image:"/images/franchiseNetwork/brand-recognition.png",
+    image:"/images/franchiseNetwork/brand-recognition.webp",
     alt: "Modern retail store interior with branded display lighting",
   },
   {
@@ -24,7 +24,7 @@ const pillars = [
     text: "Consistent supply through centralised sourcing.",
     tilt: 4,
     offset: 22,
-    image:"images/franchiseNetwork/reliable-procurement.png",
+    image:"/images/franchiseNetwork/reliable-procurement.webp",
     alt: "Freight truck on the road carrying fresh stock",
   },
   {
@@ -35,7 +35,7 @@ const pillars = [
     tilt: -3,
     offset: -10,
     image:
-      "images/franchiseNetwork/tested-retail-formats.png",
+      "/images/franchiseNetwork/tested-retail-formats.webp",
     alt: "Hygienic retail store with organised display shelves",
   },
   {
@@ -46,7 +46,7 @@ const pillars = [
     tilt: 6,
     offset: 14,
     image:
-      "images/franchiseNetwork/operational-guidance.png",
+      "/images/franchiseNetwork/operational-guidance.webp",
     alt: "Franchise team in a hands-on operational training session",
   },
   {
@@ -56,7 +56,7 @@ const pillars = [
     text: "Chicken, eggs, mutton, fish, seafood and frozen foods.",
     tilt: -6,
     offset: -24,
-    image: "/images/franchiseNetwork/variety.png",
+    image: "/images/franchiseNetwork/variety.webp",
     alt: "Chicken, mutton, fish and eggs laid out together",
   },
   {
@@ -67,7 +67,7 @@ const pillars = [
     tilt: 3,
     offset: 18,
     image:
-      "/images/franchiseNetwork/marketing.png",
+      "/images/franchiseNetwork/marketing.webp",
     alt: "Brand billboard built for visibility and recall",
   },
   {
@@ -78,7 +78,7 @@ const pillars = [
     tilt: -4,
     offset: -8,
     image:
-      "/images/franchiseNetwork/customerTrust.png",
+      "/images/franchiseNetwork/customerTrust.webp",
     alt: "Two partners shaking hands over a trusted deal",
   },
 ];

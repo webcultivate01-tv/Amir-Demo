@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import chickenImg from "../../../images/chicken.png";
+import chickenImg from "../../../images/chicken.webp";
 
 export default function Hen3D({ className = "" }) {
   const mx = useMotionValue(0);

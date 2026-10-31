@@ -7,7 +7,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { Link } from "react-router-dom";
-import amirHero from "../../../../images/Hero1 (2).png";
+import amirHero from "../../../../images/Hero1 (2).webp";
 
 export default function HeroSection() {
   const heroRef = useRef(null);

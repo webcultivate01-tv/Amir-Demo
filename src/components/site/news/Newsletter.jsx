@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 import { serverUrl } from "../../../App";
-import envelopeImg from "../../../../images/newsmedia/NewsletterEnvelope.png";
+import envelopeImg from "../../../../images/newsmedia/NewsletterEnvelope.webp";
 
 const EASE = [0.22, 1, 0.36, 1];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

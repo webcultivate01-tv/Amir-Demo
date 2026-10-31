@@ -1,14 +1,14 @@
-import aboutHero from "../../../../images/aboutHero.png";
-import oneAmir from "../../../../images/oneAmir (2).png";
-import newsHero from "../../../../images/newsHero1.png";
-import oneToAmir from "../../../../images/oneToAmir.png";
-import newsHero2 from "../../../../images/newsHero2.png";
-import heroDark from "../../../../images/Hero1 (2).png";
-import proteinHero from "../../../../images/amir-protein-hero.png";
-import chickenPlate from "../../../../images/raw-chicken-plate.png";
-import mascot from "../../../../images/chicken.png";
-import seal from "../../../../images/amir-seal-of-trust.png";
-import wordmarkWhite from "../../../../images/amir-wordmark-white.png";
+import aboutHero from "../../../../images/aboutHero.webp";
+import oneAmir from "../../../../images/oneAmir (2).webp";
+import newsHero from "../../../../images/newsHero1.webp";
+import oneToAmir from "../../../../images/oneToAmir.webp";
+import newsHero2 from "../../../../images/newsHero2.webp";
+import heroDark from "../../../../images/Hero1 (2).webp";
+import proteinHero from "../../../../images/amir-protein-hero.webp";
+import chickenPlate from "../../../../images/raw-chicken-plate.webp";
+import mascot from "../../../../images/chicken.webp";
+import seal from "../../../../images/amir-seal-of-trust.webp";
+import wordmarkWhite from "../../../../images/amir-wordmark-white.webp";
 
 /* =========================================================
    NEWS & MEDIA CONTENT
@@ -221,17 +221,17 @@ export const mediaKit = [
   {
     id: "seal",
     name: "AMIR Seal of Trust",
-    note: "Primary logo · PNG",
+    note: "Primary logo · WebP",
     src: seal,
-    file: "amir-seal-of-trust.png",
+    file: "amir-seal-of-trust.webp",
     bg: "#FFFFFF",
   },
   {
     id: "wordmark",
     name: "AMIR Wordmark (White)",
-    note: "For dark backgrounds · PNG",
+    note: "For dark backgrounds · WebP",
     src: wordmarkWhite,
-    file: "amir-wordmark-white.png",
+    file: "amir-wordmark-white.webp",
     bg: "#271719",
   },
 ];

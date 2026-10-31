@@ -8,7 +8,7 @@ export const EggIcon = forwardRef(function EggIcon(
   return (
     <img
       ref={ref}
-      src="/images/egg5.png"
+      src="/images/egg5.webp"
       alt=""
       aria-hidden="true"
       draggable={false}

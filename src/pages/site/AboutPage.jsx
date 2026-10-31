@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import storyPhoto from "../../../images/aboutShop.png";
-import founderPhoto from "../../../images/vijayMore.png";
+import storyPhoto from "../../../images/aboutShop.webp";
+import founderPhoto from "../../../images/vijayMore.webp";
 import TransformationSection from "../../components/site/home/TransformationSection";
 
 /* =========================================================

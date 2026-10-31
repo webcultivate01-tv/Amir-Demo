@@ -10,14 +10,14 @@ import FeaturedProducts from "../../components/site/home/FeaturedProducts";
 import EggFlight from "../../components/site/home/EggFlight";
 import CreatorVideoCarousel from "../../components/site/home/CreatorVideoCarousel";
 import FinalCta from "../../components/site/common/FinalCta";
-import oneAmir from "../../../images/oneAmir (2).png";
-import techBilling from "../../../images/tech/billing.jpg";
-import techEcommerce from "../../../images/tech/ecommerce.jpg";
-import techTracking from "../../../images/tech/tracking.jpg";
-import techMonitoring from "../../../images/tech/monitoring.jpg";
-import techSupport from "../../../images/tech/support.jpg";
-import techMobile from "../../../images/tech/mobile.jpg";
-import techDelivery from "../../../images/tech/delivery.jpg";
+import oneAmir from "../../../images/oneAmir (2).webp";
+import techBilling from "../../../images/tech/billing.webp";
+import techEcommerce from "../../../images/tech/ecommerce.webp";
+import techTracking from "../../../images/tech/tracking.webp";
+import techMonitoring from "../../../images/tech/monitoring.webp";
+import techSupport from "../../../images/tech/support.webp";
+import techMobile from "../../../images/tech/mobile.webp";
+import techDelivery from "../../../images/tech/delivery.webp";
 
 /* =========================================================
    ICONS
